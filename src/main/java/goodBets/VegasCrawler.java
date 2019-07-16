@@ -1,53 +1,86 @@
 package goodBets;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 public class VegasCrawler {
+	
+	/**
+	 * Helper function to get integer from odds string
+	 * @param s
+	 * @return
+	 */
+	private int getInteger(String s) {
+		int integerToReturn = 0;
+		
+		String[] nums = s.split("");
+		String[] unsignedNum = Arrays.copyOfRange(nums, 1, nums.length);
+		String number = String.join("", unsignedNum);
+		
+		if (nums[0].equals("+")) {
+			integerToReturn = Integer.parseInt(number);
+		} else if (nums[0].equals("-")) {
+			integerToReturn = Integer.parseInt(number) * -1;
+		}
+		
+		return integerToReturn;
+	}
 
-	public static void main(String[] args) {
+	/**
+	 * Creates Games for each game on Vegas Insider website
+	 */
+	public ArrayList<Game> crawlVegasSite() {
 		String address = "http://www.vegasinsider.com/mlb/odds/las-vegas/?s=538";
 		Document doc = null;
+		
 		try {
 			doc = Jsoup.connect(address).get();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		Elements oddsTable = doc.select("table.frodds-data-tbl");
+		ArrayList<Game> games = new ArrayList<Game>();
+		
 		for (Element element : oddsTable.select("tr")) {
 			List<Element> tds = element.children();
+			
 			if (tds.size() > 4) {
 				Element teams = tds.get(0);
 				List<Element> children = teams.children();
+				
+				String dateTime = null;
+				String awayTeam = null;
+				String homeTeam = null;
+				
 				if (children.size() > 4) {
-					Element dateTime = children.get(0);
-					System.out.println(dateTime.text());
-					Element awayTeam = children.get(2);
-					System.out.println(awayTeam.text());
-					Element homeTeam = children.get(4);
-					System.out.println(homeTeam.text());
+					dateTime = children.get(0).text();
+					awayTeam = children.get(2).text();
+					homeTeam = children.get(4).text();
 				}
+				
 				Element odds = tds.get(2);
 				String[] oddsArray = odds.text().split(" ");
+				int awayOdds = 0;
+				int homeOdds = 0;
 				if (oddsArray.length > 2) {
-					String awayOdds = oddsArray[1];
-					System.out.println(awayOdds);
-					String homeOdds = oddsArray[2];
-					System.out.println(homeOdds);
+					awayOdds = getInteger(oddsArray[1]);
+					homeOdds = getInteger(oddsArray[2]);
 				}
-				System.out.println("");
-
+				
+				Game game = new Game(homeTeam, awayTeam, dateTime, homeOdds, awayOdds);
+				games.add(game);
 			}
 		}
+		
+		return games;
 	}
 
 }

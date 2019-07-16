@@ -1,3 +1,5 @@
+package goodBets;
+
 import java.util.*;
 
 public class Game {
@@ -31,7 +33,6 @@ public class Game {
 	 * @param odds
 	 * @return
 	 */
-	
 	public double calculateImpliedProbability(int odds) {
 		if(odds<0) {
 			double inverse = odds * -1;
@@ -39,6 +40,7 @@ public class Game {
 		}
 		else return (100.0/(odds + 100.0))*100;
 	}
+	
 	/**
 	 * calculates the difference between the implied probability a team wins
 	 * and the "actual" probability supplied by the relevant model
@@ -49,6 +51,7 @@ public class Game {
 	public double calculateDelta(Double actual, Double implied) {
 		return actual - implied;
 	}
+	
 	/**
 	 * Calculates the home team Delta
 	 * @return
@@ -56,6 +59,7 @@ public class Game {
 	public double getHomeDelta() {
 		return homeDelta;
 	}
+	
 	/**
 	 * Calculates the away team Delta
 	 * @return
@@ -63,6 +67,7 @@ public class Game {
 	public double getAwayDelta() {
 		return awayDelta;
 	}
+	
 	/**
 	 * Sets the home team "actual" probability.
 	 * This is handled outside of the constructor, because the info will
@@ -73,6 +78,7 @@ public class Game {
 		this.homeActualProbability = homeActualProbability;
 		this.homeDelta = calculateDelta(homeActualProbability, homeImpliedProbability);
 	}
+	
 	/**
 	 * Sets the away team "actual" probability.
 	 * This is handled outside of the constructor, because the info will
@@ -110,6 +116,46 @@ public class Game {
 			System.out.printf("Suggested Bet: %s at %d with a %f edge\n", homeTeam, homeTeamOdds, homeDelta);
 		}
 		else System.out.printf("Sorry, no value to be found here!");
+	}
+
+	public String getLEAGUE() {
+		return LEAGUE;
+	}
+
+	public String getHomeTeam() {
+		return homeTeam;
+	}
+
+	public String getAwayTeam() {
+		return awayTeam;
+	}
+
+	public String getGameDay() {
+		return gameDay;
+	}
+
+	public int getHomeTeamOdds() {
+		return homeTeamOdds;
+	}
+
+	public int getAwayTeamOdds() {
+		return awayTeamOdds;
+	}
+
+	public double getHomeImpliedProbability() {
+		return homeImpliedProbability;
+	}
+
+	public double getAwayImpliedProbability() {
+		return awayImpliedProbability;
+	}
+
+	public double getHomeActualProbability() {
+		return homeActualProbability;
+	}
+
+	public double getAwayActualProbability() {
+		return awayActualProbability;
 	}
 	
 }
