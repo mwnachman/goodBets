@@ -49,6 +49,8 @@ public class VegasCrawler {
 		Elements oddsTable = doc.select("table.frodds-data-tbl");
 		ArrayList<Game> games = new ArrayList<Game>();
 		
+		BaseballTeams bt = new BaseballTeams();
+		
 		for (Element element : oddsTable.select("tr")) {
 			List<Element> tds = element.children();
 			
@@ -62,8 +64,8 @@ public class VegasCrawler {
 				
 				if (children.size() > 4) {
 					dateTime = children.get(0).text();
-					awayTeam = children.get(2).text();
-					homeTeam = children.get(4).text();
+					awayTeam = bt.getFullName(children.get(2).text());
+					homeTeam = bt.getFullName(children.get(4).text());
 				}
 				
 				Element odds = tds.get(2);
