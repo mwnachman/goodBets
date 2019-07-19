@@ -1,9 +1,9 @@
 package goodBets;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,36 +11,78 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class VegasCrawler {
-
-	public static void main(String[] args) {
-		String address = "http://www.vegasinsider.com/mlb/odds/las-vegas/?s=538";
-		URL pageLocation = null;
+	
+	/**
+	 * Helper function to get integer from odds string
+	 * @param s
+	 * @return
+	 */
+	private int getInteger(String s) {
+		int integerToReturn = 0;
 		
-		try {
-			pageLocation = new URL(address);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
+		String[] nums = s.split("");
+		String[] unsignedNum = Arrays.copyOfRange(nums, 1, nums.length);
+		String number = String.join("", unsignedNum);
+		
+		if (nums[0].equals("+")) {
+			integerToReturn = Integer.parseInt(number);
+		} else if (nums[0].equals("-")) {
+			integerToReturn = Integer.parseInt(number) * -1;
 		}
 		
-		Scanner in = null;
+		return integerToReturn;
+	}
+
+	/**
+	 * Creates Games for each game on Vegas Insider website
+	 */
+	public ArrayList<Game> crawlVegasSite() {
+		String address = "http://www.vegasinsider.com/mlb/odds/las-vegas/?s=538";
+		Document doc = null;
+		
 		try {
-			in = new Scanner(pageLocation.openStream());
+			doc = Jsoup.connect(address).get();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		String htmlText = null;
-		while (in.hasNextLine()) {
-			htmlText += in.nextLine();
+		Elements oddsTable = doc.select("table.frodds-data-tbl");
+		ArrayList<Game> games = new ArrayList<Game>();
+		
+		BaseballTeams bt = new BaseballTeams();
+		
+		for (Element element : oddsTable.select("tr")) {
+			List<Element> tds = element.children();
+			
+			if (tds.size() > 4) {
+				Element teams = tds.get(0);
+				List<Element> children = teams.children();
+				
+				String dateTime = null;
+				String awayTeam = null;
+				String homeTeam = null;
+				
+				if (children.size() > 4) {
+					dateTime = children.get(0).text();
+					awayTeam = bt.getFullName(children.get(2).text());
+					homeTeam = bt.getFullName(children.get(4).text());
+				}
+				
+				Element odds = tds.get(2);
+				String[] oddsArray = odds.text().split(" ");
+				int awayOdds = 0;
+				int homeOdds = 0;
+				if (oddsArray.length > 2) {
+					awayOdds = getInteger(oddsArray[1]);
+					homeOdds = getInteger(oddsArray[2]);
+				}
+				
+				Game game = new Game(homeTeam, awayTeam, dateTime, homeOdds, awayOdds);
+				games.add(game);
+			}
 		}
 		
-		Document document = Jsoup.parse(htmlText);
-        Elements allElements = 
-            document.getAllElements();
-        for (Element element : allElements) {
-            System.out.println(element.nodeName() 
-            + " " + element.ownText());
-        }
+		return games;
 	}
 
 }
