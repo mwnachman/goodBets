@@ -77,7 +77,7 @@ public class VegasCrawler {
 					homeOdds = getInteger(oddsArray[2]);
 				}
 				
-				Game game = new Game(homeTeam, awayTeam, dateTime, homeOdds, awayOdds);
+				Game game = new Game(awayTeam, homeTeam, dateTime, homeOdds, awayOdds);
 				games.add(game);
 			}
 		}
