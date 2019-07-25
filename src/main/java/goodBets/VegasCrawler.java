@@ -14,8 +14,8 @@ public class VegasCrawler {
 	
 	/**
 	 * Helper function to get integer from odds string
-	 * @param s
-	 * @return
+	 * @param s String of signed integer
+	 * @return Signed integer
 	 */
 	private int getInteger(String s) {
 		int integerToReturn = 0;
@@ -35,6 +35,8 @@ public class VegasCrawler {
 
 	/**
 	 * Creates Games for each game on Vegas Insider website
+	 * 
+	 * @return ArrayList of the day's games
 	 */
 	public ArrayList<Game> crawlVegasSite() {
 		String address = "http://www.vegasinsider.com/mlb/odds/las-vegas/?s=538";
@@ -46,11 +48,15 @@ public class VegasCrawler {
 			e.printStackTrace();
 		}
 		
+		// Grab the table with the odds in it
 		Elements oddsTable = doc.select("table.frodds-data-tbl");
 		ArrayList<Game> games = new ArrayList<Game>();
 		
+		// Instantiate a new BaseballTeams object to compare team names
 		BaseballTeams bt = new BaseballTeams();
 		
+		// We only want the larger elements in the table - the smaller
+		// rows are used as dividers and for other purposes
 		for (Element element : oddsTable.select("tr")) {
 			List<Element> tds = element.children();
 			
@@ -62,12 +68,15 @@ public class VegasCrawler {
 				String awayTeam = null;
 				String homeTeam = null;
 				
+				// Get the home and away team names, and grab their
+				// full names from the BaseballTeams class list
 				if (children.size() > 4) {
 					dateTime = children.get(0).text();
 					awayTeam = bt.getFullName(children.get(2).text());
 					homeTeam = bt.getFullName(children.get(4).text());
 				}
 				
+				// Get the home and away odds and convert to signed integers
 				Element odds = tds.get(2);
 				String[] oddsArray = odds.text().split(" ");
 				int awayOdds = 0;
@@ -77,6 +86,7 @@ public class VegasCrawler {
 					homeOdds = getInteger(oddsArray[2]);
 				}
 				
+				// Add the game to the day's games array
 				Game game = new Game(awayTeam, homeTeam, dateTime, homeOdds, awayOdds);
 				games.add(game);
 			}

@@ -1,3 +1,4 @@
+package goodBets;
 
 public class Game {
 	private final String LEAGUE = "MLB"; // in the future this may be a variable
@@ -14,15 +15,16 @@ public class Game {
 	private double awayDelta; // Difference between the actual and implied probabilities for the home team
 
 	/**
-	 * Initializes the game object with the teams, day, and odds variablaes,
-	 * which will have been taken from Vegas Insiders by the Vegas Crawler class
+	 * Initializes the game object with the teams, day, and odds variablaes, which
+	 * will have been taken from Vegas Insiders by the Vegas Crawler class
+	 * 
 	 * @param homeTeam
 	 * @param awayTeam
 	 * @param gameDay
 	 * @param homeTeamOdds
 	 * @param awayTeamOdds
 	 */
-	
+
 	public Game(String awayTeam, String homeTeam, String gameDay, int homeTeamOdds, int awayTeamOdds) {
 		super();
 		this.homeTeam = homeTeam;
@@ -39,7 +41,7 @@ public class Game {
 	 * that that team wins.
 	 * 
 	 * @param odds
-	 * @return
+	 * @return The implied probability
 	 */
 
 	public double calculateImpliedProbability(int odds) {
@@ -65,7 +67,7 @@ public class Game {
 	/**
 	 * Calculates the home team Delta
 	 * 
-	 * @return
+	 * @return The home team delta
 	 */
 	public double getHomeDelta() {
 		return homeDelta;
@@ -74,7 +76,7 @@ public class Game {
 	/**
 	 * Calculates the away team Delta
 	 * 
-	 * @return
+	 * @return Away team delta
 	 */
 	public double getAwayDelta() {
 		return awayDelta;
@@ -96,9 +98,7 @@ public class Game {
 	/**
 	 * Sets the away team "actual" probability. This is handled outside of the
 	 * constructor, because the info will come from a different source
-	 * 
-	 * 	 * Also calculates and sets Away Team Delta.
-
+	 * Also calculates and sets Away Team Delta.
 	 * 
 	 * @return
 	 */
@@ -171,7 +171,8 @@ public class Game {
 		if (awayDelta > 0 && awayDelta > homeDelta) {
 			System.out.printf("Suggested Bet: %s at %d with a %f edge", awayTeam, awayTeamOdds, awayDelta);
 		} else if (homeDelta > 0 && homeDelta >= awayDelta) {
-			System.out.printf("Suggested Bet: %s at %d with a %f percentage point edge\n", homeTeam, homeTeamOdds, homeDelta);
+			System.out.printf("Suggested Bet: %s at %d with a %f percentage point edge\n", homeTeam, homeTeamOdds,
+					homeDelta);
 		} else
 			System.out.printf("Sorry, no value to be found here!");
 	}
