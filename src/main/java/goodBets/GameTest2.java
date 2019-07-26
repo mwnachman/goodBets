@@ -1,3 +1,4 @@
+package goodBets;
 
 public class GameTest2 {
 	
