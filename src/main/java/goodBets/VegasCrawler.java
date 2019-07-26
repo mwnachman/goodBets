@@ -53,7 +53,7 @@ public class VegasCrawler {
 		ArrayList<Game> games = new ArrayList<Game>();
 		
 		// Instantiate a new BaseballTeams object to compare team names
-		BaseballTeams bt = new BaseballTeams();
+		TeamMap bt = new TeamMap();
 		
 		// We only want the larger elements in the table - the smaller
 		// rows are used as dividers and for other purposes

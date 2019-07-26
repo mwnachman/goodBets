@@ -177,4 +177,16 @@ public class Game {
 			System.out.printf("Sorry, no value to be found here!");
 	}
 
+	public String getAwayTeam() {
+		return awayTeam;
+	}
+
+	public String getHomeTeam() {
+		return homeTeam;
+	}
+
+	public String getGameDay() {
+		return gameDay;
+	}
+
 }
