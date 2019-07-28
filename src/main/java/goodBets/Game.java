@@ -165,17 +165,16 @@ public class Game {
 	 * Prints the relevant game info.
 	 */
 
-	public void displayGame() {
-		System.out.printf("League: %s Date: %s \n", LEAGUE, gameDay);
-		System.out.printf("%s vs. %s\n", homeTeam, awayTeam);
+	public String toString() {
+	StringBuilder description = new StringBuilder("League: " + LEAGUE + " Date:  " + gameDay + "\n" + homeTeam + " vs. " + awayTeam + "\n");
 		if (awayDelta > 0 && awayDelta > homeDelta) {
-			System.out.printf("Suggested Bet: %s at %d with a %f edge", awayTeam, awayTeamOdds, awayDelta);
+			description.append(String.format("Suggested Bet:  %s at %d with a %f edge", awayTeam, awayTeamOdds, awayDelta));
 		} else if (homeDelta > 0 && homeDelta >= awayDelta) {
-			System.out.printf("Suggested Bet: %s at %d with a %f percentage point edge\n", homeTeam, homeTeamOdds,
-					homeDelta);
-		} else
-			System.out.printf("Sorry, no value to be found here!");
+			description.append(String.format("Suggested Bet:  %s at %d with a %f edge", homeTeam, homeTeamOdds, homeDelta));
+		} else description.append("Sorry, no value to be found here!");
+	return description.toString();
 	}
+
 
 	public String getAwayTeam() {
 		return awayTeam;
