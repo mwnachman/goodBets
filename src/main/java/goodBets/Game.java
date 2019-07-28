@@ -97,8 +97,8 @@ public class Game {
 
 	/**
 	 * Sets the away team "actual" probability. This is handled outside of the
-	 * constructor, because the info will come from a different source
-	 * Also calculates and sets Away Team Delta.
+	 * constructor, because the info will come from a different source Also
+	 * calculates and sets Away Team Delta.
 	 * 
 	 * @return
 	 */
@@ -165,24 +165,50 @@ public class Game {
 	 * Prints the relevant game info.
 	 */
 
+	@Override
 	public String toString() {
-	StringBuilder description = new StringBuilder("League: " + LEAGUE + " Date:  " + gameDay + "\n" + homeTeam + " vs. " + awayTeam + "\n");
+		StringBuilder description = new StringBuilder(
+				"League: " + LEAGUE + " Date:  " + gameDay + "\n" + awayTeam + " vs. " + homeTeam + "\n");
+		description.append(String.format(
+				"Away Team Prob: %f, Away Team Implied Prob: %f, Away Team Edge: %f\nHome Team Prob: %f Home Team Implied Prob: %f, Home Team Edge: %f\n",
+				awayActualProbability, awayImpliedProbability, awayDelta, homeActualProbability, homeImpliedProbability,
+				homeDelta));
 		if (awayDelta > 0 && awayDelta > homeDelta) {
-			description.append(String.format("Suggested Bet:  %s at %d with a %f edge", awayTeam, awayTeamOdds, awayDelta));
+			description.append(
+					String.format("Suggested Bet: %s at %d with a %f edge.\n", awayTeam, awayTeamOdds, awayDelta));
 		} else if (homeDelta > 0 && homeDelta >= awayDelta) {
-			description.append(String.format("Suggested Bet:  %s at %d with a %f edge", homeTeam, homeTeamOdds, homeDelta));
-		} else description.append("Sorry, no value to be found here!");
-	return description.toString();
+			description.append(
+					String.format("Suggested Bet: %s at %d with a %f edge.\n", homeTeam, homeTeamOdds, homeDelta));
+		} else
+			description.append("Sorry, no value to be found here!\n");
+		return description.toString();
 	}
 
+	/**
+	 * return away team
+	 * 
+	 * @return
+	 */
 
 	public String getAwayTeam() {
 		return awayTeam;
 	}
 
+	/**
+	 * return home team
+	 * 
+	 * @return
+	 */
+
 	public String getHomeTeam() {
 		return homeTeam;
 	}
+
+	/**
+	 * return game day
+	 * 
+	 * @return
+	 */
 
 	public String getGameDay() {
 		return gameDay;

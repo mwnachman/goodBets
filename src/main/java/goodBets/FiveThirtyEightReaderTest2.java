@@ -1,3 +1,5 @@
+package goodBets;
+
 import java.util.ArrayList;
 
 
