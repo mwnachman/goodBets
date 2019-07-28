@@ -32,12 +32,12 @@ class FiveThirtyEightReaderTest {
 
 	@Test
 	void testSameTeamTrue() {
-		assertTrue(fte.sameTeam(testGame.getAwayTeam(),trueGame[4]));	
+		assertTrue(fte.sameTeam(testGame.getAwayTeam(),trueGame[5]));	
 	}
 	
 	@Test
 	void testSameTeamFalse() {
-		assertFalse(fte.sameTeam(testGame.getAwayTeam(), falseGame[4]));	
+		assertFalse(fte.sameTeam(testGame.getAwayTeam(), falseGame[5]));	
 	}
 
 	@Test
