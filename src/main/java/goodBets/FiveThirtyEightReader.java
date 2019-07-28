@@ -10,8 +10,7 @@ public class FiveThirtyEightReader {
 	private TeamMap tm = new TeamMap();
 	private HashMap<String, String> nameMap;
 
-	public FiveThirtyEightReader(ArrayList<Game> games) {
-		this.games = games;
+	public FiveThirtyEightReader() {
 		try {
 			fiveThirtyEight = new URL("https://projects.fivethirtyeight.com/mlb-api/mlb_elo_latest.csv");
 		} catch (MalformedURLException e) {
@@ -50,7 +49,7 @@ public class FiveThirtyEightReader {
 			return false;
 	}
 
-	public ArrayList<Game> updateGames() {
+	public void updateGames(ArrayList<Game> games) {
 		while (in.hasNext()) {
 			String[] gameData = in.nextLine().split(",");
 			for(Game g:games) {
@@ -61,7 +60,6 @@ public class FiveThirtyEightReader {
 				}
 			}
 		}
-		return games;
 	}
 
 }
