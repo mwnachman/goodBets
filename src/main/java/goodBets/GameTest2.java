@@ -7,7 +7,7 @@ public class GameTest2 {
 	public static void main(String[] args) {
 		testGame.setHomeActualProbability(37);
 		testGame.setAwayActualProbability(63);
-		testGame.displayGame();
+		System.out.println(testGame);
 	}
 
 }
