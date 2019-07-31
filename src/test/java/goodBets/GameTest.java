@@ -2,12 +2,18 @@ package goodBets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class GameTest {
 
-	private static Game testGame = new Game("Boston", "Baltimore", "07/20 7:05 PM", 190, -220);
-
+	private static Game testGame;
+	
+	@BeforeAll
+	public static void setUp() {
+		testGame = new Game("Boston", "Baltimore", "07/20 7:05 PM", 190, -220);
+	}
+	
 	// Test method to calculate implied probability
 	@Test
 	void testCalculateImpliedProbabilityNegative() {
