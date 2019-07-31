@@ -18,7 +18,7 @@ GoodBets version 1.0 focuses solely on MLB games and uses only 538’s statistic
  
 Please note that we do not intend to back test any models before starting, so users will have to come to their own conclusions about whether and how much the trust the model(s) that we are scraping.  
  
-##Installation Instructions
+## Installation Instructions
  
 Clone the repo and from the root directory run:
 
@@ -26,7 +26,7 @@ Clone the repo and from the root directory run:
 $ gradle build
 ```
  
-##Running Instructions
+## Running Instructions
  
 Once GoodBets is installed, it can be run by running Runner.java from the command line or within an IDE.  GoodBets will prompt the user for a “required edge”, which must be a double between 0 and 100.  Per the above, the required edge represents a threshold difference between actual and implied probability of a team winning; only games above that threshold will be reported to the user.  The required edge is the only user input necessary.
  
