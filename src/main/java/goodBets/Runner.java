@@ -74,10 +74,17 @@ public class Runner {
 		return suggestedGames;
 	}
 
+	/**
+	 * Requests input from the user, gathers relevant information,
+	 * and creates response file
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		requiredEdge = getRequiredEdge();
 		games = getGames();
 		suggestedGames = getSuggestedGames(games);
+		
 		if (suggestedGames.isEmpty()) { // if no games are above the required edge, tell the user there is nothing to
 										// suggest
 			System.out.println("Sorry, there are no games to suggest at this time!");
