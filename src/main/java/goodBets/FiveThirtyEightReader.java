@@ -46,8 +46,8 @@ public class FiveThirtyEightReader {
 	 * this function checks whether a line of data from fivethirtyeight and a game
 	 * object are referring to the same actual MLB game
 	 * 
-	 * @param data
-	 * @param game
+	 * @param data one line from 538
+	 * @param game one game object
 	 * @return
 	 */
 	public boolean sameGame(String[] data, Game game) {
@@ -63,8 +63,8 @@ public class FiveThirtyEightReader {
 	 * and a team name from a game object and uses the nameMap to check whther they
 	 * are referring to the same team
 	 * 
-	 * @param gameTeam
-	 * @param dataTeam
+	 * @param gameTeam a team name as stored in a game object
+	 * @param dataTeam a team name as supplied by 538
 	 * @return
 	 */
 
@@ -82,8 +82,8 @@ public class FiveThirtyEightReader {
 	 * sports, such as hockey or basketball where seasons run over the new year,
 	 * this would need to be updated.
 	 * 
-	 * @param gameDate
-	 * @param dataDate
+	 * @param gameDate a date as stored in the game object
+	 * @param dataDate a date as provided in 538
 	 * @return
 	 */
 
@@ -102,7 +102,7 @@ public class FiveThirtyEightReader {
 	 * corresponds to one of the games in the supplied ArrayList, and, if so,
 	 * updates the actual probabilities for that game object.
 	 * 
-	 * @param games
+	 * @param games an array list of game objects
 	 */
 
 	public void updateGames(ArrayList<Game> games) {
