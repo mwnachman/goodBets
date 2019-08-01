@@ -40,8 +40,8 @@ public class Game {
 	 * uses the money line odds on one team to calculate the implied probability
 	 * that that team wins.
 	 * 
-	 * @param odds
-	 * @return The implied probability
+	 * @param odds a team wins
+	 * @return The implied probability that team wins
 	 */
 
 	public double calculateImpliedProbability(int odds) {
@@ -56,9 +56,9 @@ public class Game {
 	 * calculates the difference between the implied probability a team wins and the
 	 * "actual" probability supplied by the relevant model
 	 * 
-	 * @param actual
-	 * @param implied
-	 * @return
+	 * @param actual probability a team wins
+	 * @param implied probability a team wins
+	 * @return the difference between actual and implied probability
 	 */
 	public double calculateDelta(Double actual, Double implied) {
 		return actual - implied;
@@ -88,7 +88,7 @@ public class Game {
 	 * 
 	 * Also calculates and sets Home Team Delta.
 	 * 
-	 * @return
+	 * @param home team's actual probability of winning
 	 */
 	public void setHomeActualProbability(double homeActualProbability) {
 		this.homeActualProbability = homeActualProbability;
@@ -100,7 +100,7 @@ public class Game {
 	 * constructor, because the info will come from a different source Also
 	 * calculates and sets Away Team Delta.
 	 * 
-	 * @return
+	 * @param away team's actual probability of winning
 	 */
 	public void setAwayActualProbability(double awayActualProbability) {
 		this.awayActualProbability = awayActualProbability;
@@ -154,7 +154,7 @@ public class Game {
 	 * returns the larger of the two deltas. This method will be used by the runner
 	 * method when it looks for games with an edge of greater than n.
 	 * 
-	 * @return
+	 * @return the larger of the home team delta and away team delta
 	 */
 
 	public double largerDelta() {
@@ -162,7 +162,7 @@ public class Game {
 	}
 
 	/**
-	 * Prints the relevant game info.
+	 * @return a string of the relevant game info..
 	 */
 
 	@Override
@@ -187,7 +187,7 @@ public class Game {
 	/**
 	 * return away team
 	 * 
-	 * @return
+	 * @return away team
 	 */
 
 	public String getAwayTeam() {
@@ -197,7 +197,7 @@ public class Game {
 	/**
 	 * return home team
 	 * 
-	 * @return
+	 * @return home team
 	 */
 
 	public String getHomeTeam() {
@@ -207,7 +207,7 @@ public class Game {
 	/**
 	 * return game day
 	 * 
-	 * @return
+	 * @return game date
 	 */
 
 	public String getGameDay() {
