@@ -25,7 +25,7 @@ public class Runner {
 	 * This function prompts user for user's required edge, which will be a double
 	 * between zero and 100.
 	 * 
-	 * @return
+	 * @return required edge
 	 */
 	public static double getRequiredEdge() {
 		Scanner user = new Scanner(System.in);
@@ -47,7 +47,7 @@ public class Runner {
 	 * This function initializes the VegasCrawler and uses it to get an ArrayList of
 	 * games for which odds are currently available.
 	 * 
-	 * @return
+	 * @return array list of game objects that can be bet on
 	 */
 	public static ArrayList<Game> getGames() {
 		VegasCrawler vc = new VegasCrawler();
@@ -61,8 +61,7 @@ public class Runner {
 	 * available and iterates through the fivethirtyeight data to update the Games
 	 * for the actual probabilities.
 	 * 
-	 * @param games
-	 * @return
+	 * @param array list of game objects
 	 */
 	public static ArrayList<Game> getSuggestedGames(ArrayList<Game> games) {
 		ArrayList<Game> suggestedGames = new ArrayList<Game>();
