@@ -168,17 +168,17 @@ public class Game {
 	@Override
 	public String toString() {
 		StringBuilder description = new StringBuilder(
-				"League: " + LEAGUE + " Date:  " + gameDay + "\n" + awayTeam + " vs. " + homeTeam + "\n");
+				"League: " + LEAGUE + "\nDate:  " + gameDay + "\n" + awayTeam + " vs. " + homeTeam + "\n\n");
 		description.append(String.format(
-				"Away Team Prob: %f, Away Team Implied Prob: %f, Away Team Edge: %f\nHome Team Prob: %f Home Team Implied Prob: %f, Home Team Edge: %f\n",
+				"Away Team Prob: %f\nAway Team Implied Prob: %f\nAway Team Edge: %f\nHome Team Prob: %f\nHome Team Implied Prob: %f\nHome Team Edge: %f\n\n",
 				awayActualProbability, awayImpliedProbability, awayDelta, homeActualProbability, homeImpliedProbability,
 				homeDelta));
 		if (awayDelta > 0 && awayDelta > homeDelta) {
 			description.append(
-					String.format("Suggested Bet: %s at %d with a %f edge.\n", awayTeam, awayTeamOdds, awayDelta));
+					String.format("Suggested Bet: %s at %d with a %f edge.\n\n\n", awayTeam, awayTeamOdds, awayDelta));
 		} else if (homeDelta > 0 && homeDelta >= awayDelta) {
 			description.append(
-					String.format("Suggested Bet: %s at %d with a %f edge.\n", homeTeam, homeTeamOdds, homeDelta));
+					String.format("Suggested Bet: %s at %d with a %f edge.\n\n\n", homeTeam, homeTeamOdds, homeDelta));
 		} else
 			description.append("Sorry, no value to be found here!\n");
 		return description.toString();
