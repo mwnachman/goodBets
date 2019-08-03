@@ -117,6 +117,7 @@ public class FiveThirtyEightReader {
 				}
 			}
 		}
+		in.close();
 	}
 
 }

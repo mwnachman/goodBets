@@ -32,6 +32,7 @@ public class TeamMap {
 				String fullName = info[0];
 				teamsVegasKeyMap.put(vegasName, fullName);
 			}
+			teamIn.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

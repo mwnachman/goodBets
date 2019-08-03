@@ -35,11 +35,13 @@ public class Runner {
 			if (user.hasNextDouble()) {
 				double required = user.nextDouble();
 				if (required >= 0 && required <= 100) {
+					user.close();
 					return required;
 				}
 			}
 			user.nextLine();
 		}
+		user.close();
 		return 0;
 	}
 
@@ -93,6 +95,8 @@ public class Runner {
 				for (Game g : suggestedGames) {
 					pw.println(g);
 				}
+				pw.flush();
+				pw.close();
 				System.out.println("Please check suggestions.txt for your suggested bets!");
 			} catch (IOException e) {
 				e.printStackTrace();
